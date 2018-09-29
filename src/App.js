@@ -53,17 +53,41 @@ class App extends Component {
   }
 
   toggleTodoDone(event, index) {
-    console.log(event.target.checked);
     const todos = [...this.state.todos]; //copy the array
-    todos[index] = {...todos[index]}; // copy the todo
-    todos[index].done = event.target.checked; // update done property on copied todo
-    console.log(todos)
+    todos[index] = {...todos[index], // copy the todo
+    done: event.target.checked} // update done property on copied todo
     this.setState({
       todos
     });
   
     
   }
+
+  removeTodo(index) {
+    const todos = [...this.state.todos];
+    todos.splice(index, 1); //pull out specific index
+
+    this.setState({
+      todos //update the todos array to be the same array, except for
+            //the one we spliced
+    })
+  }
+
+
+
+  allDone() {
+    const todos = this.state.todos.map(todo => {
+      return {
+        title: todo.title, 
+        done: true                     
+      };
+    });
+
+    this.setState({
+      todos
+    });
+  }
+
 
   render() {
     return (
@@ -80,6 +104,7 @@ class App extends Component {
           />
           <button type="submit">Add Todo</button>
         </form>
+        <button onClick={() => this.allDone()}>All done</button>
 
         <ul>
           {this.state.todos.map((todo, index) => {
@@ -87,10 +112,16 @@ class App extends Component {
               <input 
               onChange = {(event) => this.toggleTodoDone(event, index)}
               type="checkbox" 
+              checked = {todo.done}
               />
               <span style = {{
                 textDecoration: todo.done ? 'line-through' : 'inherit'
               }}>{todo.title}</span>
+              <button
+              onClick={() => this.removeTodo(index)}
+              >
+              Remove
+              </button>
               </li>)
           })}
         </ul>
