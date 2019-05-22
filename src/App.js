@@ -7,25 +7,17 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      message: "Let's get shit done!",
+      message: "My To-do List",
       newTodo: "",
       todos: [
         {
-          title: "Learn react",
+          title: "Learn React",
           done: false
         },
         {
-          title: "Learn JSX",
-          done: false
+          title: "Coffee",
+          done: true
         },
-        {
-          title: "Help Inna learn react",
-          done: false
-        },
-        {
-          title: "Eat Dinner",
-          done: false
-        }
       ]
     };
   }
@@ -109,6 +101,7 @@ class App extends Component {
         toggleTodoDone={this.toggleTodoDone.bind(this)}
         removeTodo = {this.removeTodo.bind(this)}
         />
+
 
       </div>
     );
