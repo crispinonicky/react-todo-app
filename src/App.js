@@ -86,6 +86,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Our Todo App!</h1>
+        <h2>Cool!</h2>
         <h2>{this.state.message}</h2>
        
         <NewTodoForm 
